@@ -1,14 +1,29 @@
+# render.yaml - Place this in your root directory
 services:
   - type: web
     name: rag-backend
     env: node
     plan: free
-    buildCommand: npm install
+    region: oregon
+    buildCommand: npm install --legacy-peer-deps
     startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
+      - key: NODE_ENV
+        value: production
       - key: OPENAI_API_KEY
         sync: false
       - key: QDRANT_URL
         sync: false
       - key: QDRANT_API_KEY
         sync: false
+
+---
+
+# .nvmrc - Specify Node.js version
+18.18.0
+
+---
+
+# Procfile (alternative to render.yaml)
+web: npm start
