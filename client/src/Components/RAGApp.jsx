@@ -10,6 +10,7 @@ import {
 	XCircle,
 	AlertCircle,
 } from 'lucide-react';
+import LexiconLogo from './LexiconLogo';
 
 const API_BASE_URL =
 	import.meta.env.VITE_API_URL ||
@@ -28,6 +29,8 @@ export default function RAGApp() {
 		'chaicode-collection',
 		'mdn-docs-collection',
 		'csv-collection',
+		'pdf-collection',
+		'url-collection',
 	]);
 	const [error, setError] = useState('');
 
@@ -251,8 +254,9 @@ export default function RAGApp() {
 					{/* Header */}
 					<div className="mb-6">
 						<h2 className="text-2xl font-bold mb-2 flex items-center gap-2">
-							<Database className="w-6 h-6" />
-							RAG Store
+							{/* <Database className="w-6 h-6" />
+							RAG Store */}
+							<LexiconLogo textColor="white" />
 						</h2>
 						<p className="text-gray-400">
 							Add documents to your knowledge base
