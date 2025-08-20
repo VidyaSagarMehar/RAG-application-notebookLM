@@ -17,7 +17,16 @@ const port = process.env.PORT || 3001;
 const client = new OpenAI();
 
 // Middleware
-app.use(cors());
+app.use(
+	cors({
+		origin: [
+			'http://localhost:3000',
+			'https://rag-application-notebook-lm.vercel.app',
+			'https://*.vercel.app',
+		],
+		credentials: true,
+	}),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
