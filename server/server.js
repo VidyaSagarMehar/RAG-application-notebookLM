@@ -19,14 +19,25 @@ const client = new OpenAI();
 // Middleware
 app.use(
 	cors({
-		origin: [
-			'http://localhost:3000',
-			'https://rag-application-notebook-lm.vercel.app',
-			'https://*.vercel.app',
-		],
+		origin: function (origin, callback) {
+			const allowedOrigins = [
+				'http://localhost:3000',
+				'http://localhost:5173',
+				'https://rag-application-notebook-lm.vercel.app',
+			];
+
+			if (!origin) return callback(null, true);
+
+			if (allowedOrigins.includes(origin)) {
+				return callback(null, true);
+			}
+
+			callback(new Error('Not allowed by CORS'));
+		},
 		credentials: true,
 	}),
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
